@@ -14,6 +14,7 @@ import {
 } from '@nestjs/common';
 
 import { ProductsService } from './products.service';
+import { ApiParam } from '@nestjs/swagger';
 
 @Controller('products')
 export class ProductsController {
@@ -37,6 +38,11 @@ export class ProductsController {
     });
   }
   @Get('/:productID')
+  @ApiParam({
+    name: 'productID',
+    required: true,
+    description: 'The id that is representated in the database',
+  })
   async getProduct(@Res() res, @Param('productID') productID) {
     const product = await this.productService.getProduct(productID);
     if (!product) throw new NotFoundException('Product does not exist!');

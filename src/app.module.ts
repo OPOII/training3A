@@ -7,8 +7,9 @@ import { StoreModule } from './store/store.module';
 @Module({
   imports: [
     ProductsModule,
-    MongooseModule.forRoot('mongodb://localhost/products'),
     StoreModule,
+    MongooseModule.forRoot('mongodb://localhost/products'),
+    MongooseModule.forRoot('mongodb://localhost/store'),
   ],
   controllers: [AppController],
   providers: [AppService],
