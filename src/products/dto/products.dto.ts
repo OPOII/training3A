@@ -19,6 +19,11 @@ export class CreateProductDTO {
   @Prop()
   @ApiProperty()
   price: number;
+
+  @Prop()
+  @ApiProperty()
+  owner: Types.ObjectId;
+
   @ApiProperty()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store', required: true })
   store: Types.ObjectId;
