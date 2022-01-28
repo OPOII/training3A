@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import * as mongoose from 'mongoose';
+import { Types } from 'mongoose';
 import { CreateProductDTO } from '../../products/dto/products.dto';
 
-export type StordeDocument = Store & Document;
+export type StoreDocument = Store & Document;
 
 @Schema()
 export class Store {
@@ -20,7 +21,9 @@ export class Store {
   @ApiProperty()
   createdAt: Date;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'CreateProductDTO' })
-  product: CreateProductDTO;
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CreateProductDTO' }],
+  })
+  product: CreateProductDTO[];
 }
 export const StoreSchema = SchemaFactory.createForClass(Store);

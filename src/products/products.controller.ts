@@ -1,4 +1,5 @@
 import { CreateProductDTO } from './dto/products.dto';
+import { Store } from 'src/store/dto/store.dto';
 import {
   Controller,
   Get,
@@ -75,4 +76,27 @@ export class ProductsController {
       updated,
     });
   }
+  @Delete('/deleteAll')
+  async deleteAllProducts() {
+    await this.productService.deleteAll();
+  }
+  @Get('/storeName/:name')
+  async getProductsWithStore(@Res() res) {
+    const response = await this.productService.getProductsByStore();
+    return res.status(HttpStatus.OK).json({
+      message: 'All ok',
+      response,
+    });
+  }
+
+  /*@Get('/:name')
+  @ApiParam({
+    name: 'name',
+    required: true,
+    description: 'The store name that is representated in the database',
+  })
+  async getProductsWithStore(@Param('name') storeName){
+    
+  }
+  */
 }

@@ -2,10 +2,14 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
+  Get,
   HttpStatus,
+  Param,
   Post,
   Res,
 } from '@nestjs/common';
+import { ApiParam } from '@nestjs/swagger';
 import { Store } from './dto/store.dto';
 import { StoreService } from './store.service';
 
@@ -23,5 +27,25 @@ export class StoreController {
       message: 'The store is added succesfully',
       stored,
     });
+  }
+
+  @Get('/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'The id that is representated in the database',
+  })
+  async getStoresWithPopulate(@Param('id') id) {}
+
+  @Get('/')
+  async getStores(@Res() res) {
+    const stores = await this.service.getStores();
+    return res.status(HttpStatus.OK).json({
+      stores,
+    });
+  }
+  @Delete('/deleteAll')
+  async deleteAll() {
+    await this.service.deleteAll();
   }
 }

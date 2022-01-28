@@ -1,7 +1,8 @@
 import { Store } from './../../store/dto/store.dto';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger';
+import { Types } from 'mongoose';
+import { ApiProperty, ApiResponseProperty } from '@nestjs/swagger';
 export type CreateProductDTODocument = CreateProductDTO & Document;
 
 @Schema()
@@ -18,9 +19,9 @@ export class CreateProductDTO {
   @Prop()
   @ApiProperty()
   price: number;
-
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store' })
-  store: Store;
+  @ApiProperty()
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store', required: true })
+  store: Types.ObjectId;
 }
 
 export const CreateProductDTOSchema =
