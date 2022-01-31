@@ -27,6 +27,9 @@ export class CreateProductDTO {
   @ApiProperty()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store', required: true })
   store: Types.ObjectId;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  user: Types.ObjectId;
 }
 
 export const CreateProductDTOSchema =
