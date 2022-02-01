@@ -8,15 +8,15 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.userService.findUser(username);
     if (user) {
-      const response = this.comparePassword(password, user.password);
+      const response = this.userService.validatePassForService(
+        password,
+        user.password,
+      );
       if (response) {
+        const { password, username, ...rest } = user;
+        return rest;
       }
+      return null;
     }
-  }
-  private hashPassword(password: string) {
-    return bcrypt.hash(password, 12);
-  }
-  private comparePassword(password: string, storePassword: string) {
-    return bcrypt.compare(password, storePassword);
   }
 }

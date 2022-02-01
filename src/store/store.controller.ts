@@ -8,8 +8,10 @@ import {
   Param,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
+import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 import { Store } from './dto/store.dto';
 import { StoreService } from './store.service';
 
@@ -37,6 +39,7 @@ export class StoreController {
   })
   async getStoresWithPopulate(@Param('id') id) {}
 
+  @UseGuards(AuthenticatedGuard)
   @Get('/')
   async getStores(@Res() res) {
     const stores = await this.service.getStores();
