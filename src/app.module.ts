@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { StoreModule } from './store/store.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { LoginModule } from './login/login.module';
 @Module({
   imports: [
     ProductsModule,
@@ -14,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot('mongodb://localhost/store'),
     UserModule,
     AuthModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],

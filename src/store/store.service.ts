@@ -10,26 +10,24 @@ export class StoreService {
     private readonly storeModel: Model<StoreDocument>,
   ) {}
 
-  async getStores(): Promise<StoreDocument[]> {
+  async getStores(): Promise<any> {
     const products = await this.storeModel.find();
     return products;
   }
-  async getStore(productID: string): Promise<StoreDocument> {
+  async getStore(productID: string): Promise<any> {
     const product = await this.storeModel.findById(productID);
     return product;
   }
-  async createStore(createStore: Store): Promise<StoreDocument> {
+  async createStore(createStore: Store, userId: string): Promise<any> {
     const product = await new this.storeModel(createStore);
+    product.owner = userId;
     return await product.save();
   }
-  async deleteStore(storeID: string): Promise<StoreDocument> {
+  async deleteStore(storeID: string): Promise<any> {
     const deleted = await this.storeModel.findByIdAndDelete(storeID);
     return deleted;
   }
-  async updateStore(
-    store: string,
-    createdStore: Store,
-  ): Promise<StoreDocument> {
+  async updateStore(store: string, createdStore: Store): Promise<any> {
     const updateStore = await this.storeModel.findByIdAndUpdate(
       store,
       createdStore,

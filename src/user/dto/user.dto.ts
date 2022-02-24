@@ -14,6 +14,8 @@ export class User {
   @ApiProperty()
   @Prop()
   password: string;
+  //ID of the owner
+  owner?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -15,7 +15,6 @@ export class Store {
   @ApiProperty()
   direction: string;
   @Prop()
-  @ApiProperty()
   owner: string;
   @Prop()
   @ApiProperty()

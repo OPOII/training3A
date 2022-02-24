@@ -18,12 +18,8 @@ import { LocalAuthGuard } from '../auth/local-auth.guard';
 @Controller('user')
 export class UserController {
   constructor(private service: UserService) {}
-  @UseGuards(LocalAuthGuard)
-  @Post('login')
-  async login(@Request() req) {
-    return req.user;
-  }
 
+  //@UseGuards(AuthenticatedGuard)
   @Post('createUser')
   async createUser(@Res() res, @Body() bodyUser: User) {
     const user = await this.service.createUser(bodyUser);
@@ -33,11 +29,5 @@ export class UserController {
       message: 'The store is added succesfully',
       user,
     });
-  }
-
-  @UseGuards(AuthenticatedGuard)
-  @Get('prueba')
-  async getHello(@Request() req) {
-    return req.user;
   }
 }
